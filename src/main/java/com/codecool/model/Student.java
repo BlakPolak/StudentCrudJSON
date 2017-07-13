@@ -1,18 +1,14 @@
 package com.codecool.model;
 
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-@Table
 public class Student {
 
     @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
-
     private String first_name;
     private String last_name;
     private String klass;

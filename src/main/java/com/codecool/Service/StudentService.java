@@ -55,7 +55,9 @@ public class StudentService {
 
     public void update(String id, Map<String, String>  map){
         Student student = studentRepository.findOne(id);
-
+        if (student == null){
+            throw new NotFoundError();
+        }
         for (String key: map.keySet()){
             if (key.equals("firstName")){
                 String firstNameToUpdate = map.get("firstName");
@@ -81,15 +83,18 @@ public class StudentService {
     }
 
     public void remove(String id) {
+        Student student =studentRepository.findOne(id);
+        if (student == null){
+            throw new NotFoundError();
+        }
         studentRepository.delete(id);
     }
 
     public Student findById(String id) {
-        try{
-            studentRepository.findOne(id);
-        } catch (IllegalArgumentException e){
+        Student student =studentRepository.findOne(id);
+        if (student == null){
             throw new NotFoundError();
         }
-       return studentRepository.findOne(id);
+        return studentRepository.findOne(id);
     }
 }
